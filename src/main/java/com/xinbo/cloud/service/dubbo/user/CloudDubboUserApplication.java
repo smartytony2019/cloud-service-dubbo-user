@@ -12,8 +12,8 @@ import tk.mybatis.spring.annotation.MapperScan;
  * @desc file desc
  */
 
-@SpringBootApplication
 @EnableDubbo
+@SpringBootApplication(scanBasePackages = "com.xinbo.cloud")
 @MapperScan(basePackages = "com.xinbo.cloud.common.mapper")
 public class CloudDubboUserApplication {
     public static void main(String[] args) {

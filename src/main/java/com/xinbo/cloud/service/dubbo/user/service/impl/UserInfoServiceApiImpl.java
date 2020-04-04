@@ -1,10 +1,9 @@
-package com.xinbo.cloud.service.dubbo.user.service;
+package com.xinbo.cloud.service.dubbo.user.service.impl;
 
-import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.xinbo.cloud.common.domain.common.UserInfo;
 import com.xinbo.cloud.common.mapper.common.UserInfoMapper;
-import com.xinbo.cloud.common.service.api.UserInfoService;
+import com.xinbo.cloud.common.service.api.UserInfoServiceApi;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -18,7 +17,7 @@ import java.util.List;
 
 @Slf4j
 @Service(version = "1.0.0")
-public class UserInfoServiceImpl implements UserInfoService {
+public class UserInfoServiceApiImpl implements UserInfoServiceApi {
 
 
 

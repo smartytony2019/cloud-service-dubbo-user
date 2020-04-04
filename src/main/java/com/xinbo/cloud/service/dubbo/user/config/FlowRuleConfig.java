@@ -15,6 +15,7 @@ import java.util.Collections;
  * @date 2020/4/3 22:53
  * @desc file desc
  */
+@Slf4j
 @Component
 public class FlowRuleConfig {
 
@@ -23,9 +24,10 @@ public class FlowRuleConfig {
      */
     @Bean
     private static void setUserInfoServiceFlowRule() {
+        log.info("--------------------------- dubbo访问限流  ---------------------------");
         FlowRule flowRule = new FlowRule();
-        flowRule.setResource("com.xinbo.cloud.common.service.api.UserInfoService");
-        flowRule.setCount(10);
+        flowRule.setResource("com.xinbo.cloud.common.service.api.UserInfoServiceApi");
+        flowRule.setCount(3);
         flowRule.setGrade(RuleConstant.FLOW_GRADE_QPS);
         flowRule.setLimitApp("default");
         FlowRuleManager.loadRules(Collections.singletonList(flowRule));

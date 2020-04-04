@@ -79,7 +79,7 @@
 
         <dependency>
             <groupId>com.xinbo</groupId>
-            <artifactId>cloud-common-mapper</artifactId>
+            <artifactId>cloud-common-service</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
 
