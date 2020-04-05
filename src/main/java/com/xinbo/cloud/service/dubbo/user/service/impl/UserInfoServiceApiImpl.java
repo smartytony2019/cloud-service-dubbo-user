@@ -16,7 +16,7 @@ import java.util.List;
  */
 
 @Slf4j
-@Service(version = "1.0.0")
+@Service(version = "A1.0.0")
 public class UserInfoServiceApiImpl implements UserInfoServiceApi {
 
 
