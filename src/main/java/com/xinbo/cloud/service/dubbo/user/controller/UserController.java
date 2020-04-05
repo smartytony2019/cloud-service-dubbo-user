@@ -1,12 +1,13 @@
 package com.xinbo.cloud.service.dubbo.user.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.xinbo.cloud.common.domain.common.Merchant;
 import com.xinbo.cloud.common.domain.common.UserInfo;
 import com.xinbo.cloud.common.dto.ActionResult;
 import com.xinbo.cloud.common.dto.ResultFactory;
+import com.xinbo.cloud.common.service.api.RedisServiceApi;
 import com.xinbo.cloud.common.service.api.MerchantServiceApi;
 import com.xinbo.cloud.common.service.common.UserInfoService;
+import com.xinbo.cloud.common.vo.library.cache.StringVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +28,11 @@ public class UserController {
     @Reference(version = "A1.0.0", mock = "com.xinbo.cloud.common.service.mock.MerchantServiceMock")
     private MerchantServiceApi merchantServiceApi;
 
+
+    /* 内部RPC接口 */
+    @Reference(version = "1.0.0", mock = "com.xinbo.cloud.common.service.mock.RedisServiceMock")
+    private RedisServiceApi redisServiceApi;
+
     /* 外部RESTFUL接口 */
     @Autowired
     @Qualifier("userInfoServiceImpl")
@@ -35,9 +41,10 @@ public class UserController {
 
 
     @GetMapping("getMerchant")
-    public String getMerchant() {
-        Merchant merchant = merchantServiceApi.getMerchant();
-        return merchant.getMerchantCode()+" -- "+merchant.getMerchantName();
+    public ActionResult getMerchant() {
+        StringVo vo = StringVo.builder().value("123").expire(12000).key("abc").build();
+        redisServiceApi.stringSet(vo);
+        return ResultFactory.success(redisServiceApi.stringGet("abc"));
     }
 
 
